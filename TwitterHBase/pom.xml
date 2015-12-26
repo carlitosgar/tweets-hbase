@@ -14,6 +14,36 @@
           <target>1.7</target>
         </configuration>
       </plugin>
+      <plugin>
+      	<groupId>org.codehaus.mojo</groupId>
+      	<artifactId>appassembler-maven-plugin</artifactId>
+      	<version>1.6</version>
+      	<executions>
+      		<execution>
+      			<id>assemble-standalone</id>
+      			<phase>package</phase>
+      			<goals>
+      				<goal>assemble</goal>
+      			</goals>
+      		</execution>
+      	</executions>
+      	<configuration>
+      		<platforms>
+      			<platform>unix</platform>
+      		</platforms>
+      		<programs>
+      			<program>
+      				<mainClass>master.HBaseApp</mainClass>
+      				<name>hbaseApp.sh</name>
+      				<jvmSettings>
+      					<extraArguments>
+      						<extraArgument>-server</extraArgument>
+      					</extraArguments>
+      				</jvmSettings>
+      			</program>
+      		</programs>
+      	</configuration>
+      </plugin>
     </plugins>
   </build>
   <dependencies>
