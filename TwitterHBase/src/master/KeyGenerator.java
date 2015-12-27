@@ -9,12 +9,10 @@ public class KeyGenerator {
 		return Bytes.concat(Longs.toByteArray(time), lang.getBytes());
 	}
 	
-	public static byte[] getStartKey(Long time) {
-		return generateKey(time, "aa");
-	}
-	
-	public static byte[] getEndKey(Long time) {
-		return generateKey(time, "zz");
+	public static byte[] generateEndKey(Long time, String lang) {
+		byte[] langBytes = lang.getBytes();
+		langBytes[langBytes.length - 1]++;
+		return Bytes.concat(Longs.toByteArray(time), langBytes);
 	}
 
 }

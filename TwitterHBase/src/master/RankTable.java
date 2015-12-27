@@ -23,9 +23,13 @@ public class RankTable {
 	public static final byte[] TABLE = Bytes.toBytes("RANK");
 	public static final byte[] CF_HASHTAGS = Bytes.toBytes("HASHTAGS");
 	public static final byte[] CF_COUNTS = Bytes.toBytes("COUNTS");
+	
+	public static final String HASHTAG_COLUMN_PREFIX = "C_HASHTAGS_";
 	public static final byte[] C_HASHTAGS_1 = Bytes.toBytes("HASHTAGS_1");
 	public static final byte[] C_HASHTAGS_2 = Bytes.toBytes("HASHTAGS_2");
 	public static final byte[] C_HASHTAGS_3 = Bytes.toBytes("HASHTAGS_3");
+	
+	public static final String COUNT_COLUMN_PREFIX = "C_COUNTS_";
 	public static final byte[] C_COUNTS_1 = Bytes.toBytes("COUNTS_1");
 	public static final byte[] C_COUNTS_2 = Bytes.toBytes("COUNTS_2");
 	public static final byte[] C_COUNTS_3 = Bytes.toBytes("COUNTS_3");
@@ -33,12 +37,12 @@ public class RankTable {
 	private static HTable table;
 	private static HConnection conn;
 	
-	public static void open() throws MasterNotRunningException, ZooKeeperConnectionException, IOException {
+	public static HTable open() throws MasterNotRunningException, ZooKeeperConnectionException, IOException {
 		
 		Configuration conf = HBaseConfiguration.create();
 		conn = HConnectionManager.createConnection(conf);
 		table = new HTable(TableName.valueOf(TABLE),conn);
-		
+		return table;
 	}
 	
 	public static void createTable() {

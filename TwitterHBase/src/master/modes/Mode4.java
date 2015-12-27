@@ -1,4 +1,4 @@
-package master;
+package master.modes;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,9 +9,17 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import master.KeyGenerator;
+import master.RankTable;
+
 public class Mode4 {
 	
 	public static void execute(String[] args) {
+		
+		if(args.length != 2) {
+			System.err.println("Invalid arguments for mode 4");
+			return;
+		}
 		
 		File dir = new File(args[1]);
 		
@@ -81,7 +89,7 @@ public class Mode4 {
 		    	}
 		    	
 		    	Long timestamp = new Long(splitted[0]);
-		    	String lang = splitted[1];
+		    	String lang = splitted[1].toLowerCase();
 		    	
 		    	byte[] key = KeyGenerator.generateKey(timestamp, lang);
 		    	
