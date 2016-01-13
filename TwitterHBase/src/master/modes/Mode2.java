@@ -39,7 +39,7 @@ public class Mode2 {
 		Long startTs = Long.parseLong(args[1]);
 		Long endTs = Long.parseLong(args[2]);
 		int rankSize = Integer.parseInt(args[3]);
-		String logPath = (args[6].endsWith(File.separator) ? args[6] : args[6] + File.separator);
+		String logPath = (args[5].endsWith(File.separator) ? args[5] : args[5] + File.separator);
 		
 		//Get list of languages
 		List<String> languages = new ArrayList<String>();

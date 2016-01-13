@@ -35,12 +35,16 @@ public class HashtagRank {
 	public List<HashtagRankEntry> getBestN(int n) {
 		
 		List<HashtagRankEntry> entries = new LinkedList<HashtagRankEntry>(this.hashMap.values());
-		
+		List<HashtagRankEntry> ret = new LinkedList<HashtagRankEntry>();
 		// Sort the entries
 		Collections.sort(entries);
 		
 		// Return the top n elements
-		return entries.subList(0, (n < this.size() ? n : this.size()));
+		for(HashtagRankEntry ent : entries.subList(0, (n < this.size() ? n : this.size()))) {
+			ret.add(ent);
+		}
+		
+		return ret;
 		
 	}
 	
