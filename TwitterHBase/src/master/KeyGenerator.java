@@ -14,5 +14,13 @@ public class KeyGenerator {
 		langBytes[langBytes.length - 1]++;
 		return Bytes.concat(Longs.toByteArray(time), langBytes);
 	}
+	
+	public static byte[] generateKey(Long time) {
+		return Longs.toByteArray(time);
+	}
+	
+	public static byte[] generateEndKey(Long time) {
+		return Longs.toByteArray(time++);
+	}
 
 }
