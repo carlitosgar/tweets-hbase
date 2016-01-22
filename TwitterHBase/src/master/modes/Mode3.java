@@ -25,7 +25,7 @@ public class Mode3 {
 	 */
 	public static void execute(String[] args) {
 		if(args.length != 5) {
-			System.err.println("Invalid arguments for mode 1");
+			System.err.println("Invalid arguments for mode 3");
 			return;
 		}
 		
@@ -67,10 +67,8 @@ public class Mode3 {
 			}
 			
 			// Log results
-			// Regardless the language? Do we have to log language according to
-			// the exercise format?
 			FileLog logger = new FileLog(logPath + "02_query3.out");
-			logger.writeToFile(rank.getBestN(rankSize), startTs, endTs);
+			logger.writeToFile(rank.getBestN(rankSize), startTs, endTs, true);
 			logger.cleanup();
 			
 		} catch (IOException e) {

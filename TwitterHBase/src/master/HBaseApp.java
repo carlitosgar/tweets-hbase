@@ -2,6 +2,7 @@ package master;
 
 import master.modes.Mode1;
 import master.modes.Mode2;
+import master.modes.Mode3;
 import master.modes.Mode4;
 
 public class HBaseApp {
@@ -24,8 +25,7 @@ public class HBaseApp {
 			break;
 			
 		case "3":
-			//TODO
-			System.err.println("To be implemented");
+			Mode3.execute(args);
 			break;
 			
 		case "4":

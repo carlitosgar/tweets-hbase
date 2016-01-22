@@ -32,7 +32,7 @@ public class Mode2 {
 	 */
 	public static void execute(String[] args) {
 		if(args.length != 6) {
-			System.err.println("Invalid arguments for mode 1");
+			System.err.println("Invalid arguments for mode 2");
 			return;
 		}
 		
@@ -113,7 +113,7 @@ public class Mode2 {
 			// Log results
 			FileLog logger = new FileLog(logPath + "02_query2.out");
 			for(HashtagRank rank : rankings.values()){
-				logger.writeToFile(rank.getBestN(rankSize), startTs, endTs);
+				logger.writeToFile(rank.getBestN(rankSize), startTs, endTs, false);
 			}
 			logger.cleanup();
 			

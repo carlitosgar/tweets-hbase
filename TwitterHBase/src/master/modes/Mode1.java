@@ -1,5 +1,6 @@
 package master.modes;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
 
@@ -12,6 +13,7 @@ import org.apache.hadoop.hbase.filter.RegexStringComparator;
 import org.apache.hadoop.hbase.filter.RowFilter;
 import org.apache.hadoop.hbase.util.Bytes;
 
+import master.FileLog;
 import master.KeyGenerator;
 import master.RankTable;
 import master.structures.HashtagRank;
@@ -34,6 +36,7 @@ public class Mode1 {
 		Long endTs = Long.parseLong(args[2]);
 		int rankSize = Integer.parseInt(args[3]);
 		String lang = args[4].toLowerCase();
+		String logPath = (args[5].endsWith(File.separator) ? args[5] : args[5] + File.separator);
 		
 		if(lang.length() != 2) {
 			System.err.println("Lang parameter should have two characters.");
@@ -77,8 +80,10 @@ public class Mode1 {
 				res = rs.next();
 			}
 			
-			// TODO: store results in file
-			System.out.println(rank.getBestN(rankSize));
+			// Log results
+			FileLog logger = new FileLog(logPath + "02_query1.out");
+			logger.writeToFile(rank.getBestN(rankSize), startTs, endTs, false);
+			logger.cleanup();
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -103,8 +108,11 @@ public class Mode1 {
 				byte[] hashtagRaw = res.getValue(RankTable.CF_HASHTAGS, hashtagColumn);
 				byte[] countRaw = res.getValue(RankTable.CF_COUNTS, countColumn);
 				
+				String key = Bytes.toString(res.getRow());
+				String lang = key.substring(key.length()-2);
+				
 				if(hashtagRaw != null && countRaw != null) {
-					rank.add(new HashtagRankEntry("", Bytes.toString(hashtagRaw), Bytes.toInt(countRaw)));
+					rank.add(new HashtagRankEntry(lang, Bytes.toString(hashtagRaw), Bytes.toInt(countRaw)));
 				}
 				
 			}

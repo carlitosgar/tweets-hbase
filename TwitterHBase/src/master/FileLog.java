@@ -23,16 +23,19 @@ public class FileLog {
 					new OutputStreamWriter(new FileOutputStream(file, true),"UTF-8"));
 		} catch (IOException e) {
 			e.printStackTrace();
-			return;
 		}	
 	}
 	
-	public void writeToFile(List<HashtagRankEntry> rank, Long startTs, Long endTs) throws IOException{
+	public void writeToFile(List<HashtagRankEntry> rank, Long startTs, Long endTs, boolean query3) throws IOException{
 		HashtagRankEntry entry;
 		String s = "";
 		for(int i = 0; i < rank.size(); i++){
 			entry = rank.get(i);
-			s += entry.language + "," + i + "," + entry.hashtag + "," + startTs + "," + endTs;
+			if(query3){
+				s = (i+1) + "," + entry.hashtag + "," + entry.count + "," + startTs + "," + endTs; 
+			} else {
+				s = entry.language + "," + (i+1) + "," + entry.hashtag + "," + startTs + "," + endTs;
+			}
 			this.writer.write(s);
 			this.writer.newLine();
 			this.writer.flush();
