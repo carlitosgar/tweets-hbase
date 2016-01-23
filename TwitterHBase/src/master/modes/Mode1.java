@@ -3,6 +3,7 @@ package master.modes;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.util.regex.Pattern;
 
 import org.apache.hadoop.hbase.client.HTable;
 import org.apache.hadoop.hbase.client.Result;
@@ -60,7 +61,7 @@ public class Mode1 {
 		Scan scan = new Scan(startKey, endKey);
 		
 		// Add filter by lang
-		RegexStringComparator endsWithLang = new RegexStringComparator(lang + "$");
+		RegexStringComparator endsWithLang = new RegexStringComparator(lang + "$", Pattern.CASE_INSENSITIVE);
 		RowFilter langFilter = new RowFilter(CompareOp.EQUAL, endsWithLang);
 		scan.setFilter(langFilter);
 		

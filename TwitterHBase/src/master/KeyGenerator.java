@@ -1,26 +1,26 @@
 package master;
 
 import com.google.common.primitives.Bytes;
-import com.google.common.primitives.Longs;
 
 public class KeyGenerator {
 
 	public static byte[] generateKey(Long time, String lang) {
-		return Bytes.concat(Longs.toByteArray(time), lang.getBytes());
+		byte[] bytes = Bytes.concat(time.toString().getBytes(), lang.getBytes());
+		return bytes;
 	}
 	
 	public static byte[] generateEndKey(Long time, String lang) {
 		byte[] langBytes = lang.getBytes();
 		langBytes[langBytes.length - 1]++;
-		return Bytes.concat(Longs.toByteArray(time), langBytes);
+		return Bytes.concat(time.toString().getBytes(), langBytes);
 	}
 	
 	public static byte[] generateKey(Long time) {
-		return Longs.toByteArray(time);
+		return time.toString().getBytes();
 	}
 	
 	public static byte[] generateEndKey(Long time) {
-		return Longs.toByteArray(time++);
+		return ((Long)(time + 1)).toString().getBytes();
 	}
 
 }
